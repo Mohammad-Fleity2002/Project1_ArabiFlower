@@ -3,6 +3,9 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+# CI Pipeline YAML configuration
+# This pipeline builds the web application, runs tests, and generates a Docker image.
+
 trigger:
 - main
 
@@ -10,12 +13,21 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: Docker@2
+  displayName: 'Build Docker Image'
+  inputs:
+    containerRegistry: 'azure-container-connection' # Specify your container registry service connection name
+    command: 'build'
+    Dockerfile: '**/Dockerfile' # Path to your Dockerfile
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: Docker@2
+  displayName: 'Push Docker Image to Registry'
+  inputs:
+    containerRegistry: 'azure-container-connection' # Specify your container registry service connection name
+    command: 'push'
+    Dockerfile: '**/Dockerfile' # Path to your Dockerfile
+
+# Add more steps here for building the web application and running tests
+
 # azure-container-connection
 # Azure Container Registry Application
