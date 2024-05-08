@@ -1,0 +1,66 @@
+# # Starter pipeline
+# # Start with a minimal pipeline that you can customize to build and deploy your code.
+# # Add steps that build, run tests, deploy, and more:
+# # https://aka.ms/yaml
+
+# # CI Pipeline YAML configuration
+# # This pipeline builds the web application, runs tests, and generates a Docker image.
+
+# trigger:
+# - main
+
+# pool:
+#   vmImage: ubuntu-latest
+
+# steps:
+# - task: Docker@2
+#   displayName: 'Build Docker Image'
+#   inputs:
+#     containerRegistry: 'ArabiFlower-Docker' # Specify your container registry service connection name
+#     command: 'build'
+#     Dockerfile: '**/Dockerfile' # Path to your Dockerfile
+
+# - task: Docker@2
+#   displayName: 'Push Docker Image to Registry'
+#   inputs:
+#     containerRegistry: 'ArabiFlower-Docker' # Specify your container registry service connection name
+#     command: 'push'
+#     Dockerfile: '**/Dockerfile' # Path to your Dockerfile
+
+# # Add more steps here for building the web application and running tests
+# # ArabiFlower-Docker
+# # azure-container-connection
+# # Azure Container Registry Application
+# CI Pipeline YAML configuration
+# This pipeline builds the simple HTML/CSS/JS web application and generates a Docker image.
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: |
+    # No build steps needed for a simple HTML/CSS/JS application
+    echo "Building the application"
+  displayName: 'Building App'
+
+- script: |
+    # No tests needed for a simple HTML/CSS/JS application
+    echo "testing the application."
+  displayName: 'Run Tests'
+
+- task: Docker@2
+  displayName: 'Build Docker Image'
+  inputs:
+    containerRegistry: 'ArabiFlower-Docker' # Specify your container registry service connection name
+    command: 'build'
+    Dockerfile: '**/Dockerfile' # Path to your Dockerfile
+
+- task: Docker@2
+  displayName: 'Push Docker Image to Registry'
+  inputs:
+    containerRegistry: 'ArabiFlower-Docker' # Specify your container registry service connection name
+    command: 'push'
+    Dockerfile: '**/Dockerfile' # Path to your Dockerfile
