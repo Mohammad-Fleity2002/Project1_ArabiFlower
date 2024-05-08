@@ -37,5 +37,5 @@ steps:
 
 - script: |
     docker pull mohammadfleity2002/project1-arabiflower:latest
-    docker run -d -p 8080:80 mohammadfleity2002/project1-arabiflower-deployement:latest
   displayName: 'Deploy to Docker'
+    # docker run -d -p 8080:80 mohammadfleity2002/project1-arabiflower:latest
