@@ -34,17 +34,8 @@ steps:
     username: $(mohammadfleity2002)
     password: $(MohammadDockerPassword2002)
 
-- task: PowerShell@2
-  displayName: 'Get Latest Tag'
-  inputs:
-    targetType: 'inline'
-    script: |
-      $tags = Invoke-RestMethod -Uri "https://registry.hub.docker.com/v2/repositories/mohammadfleity2002/project1-arabiflower/tags/" | Select-Object -ExpandProperty results | Select-Object -ExpandProperty name
-      $latestTag = $tags | Sort-Object -Property { [version] $_ } | Select-Object -Last 1
-      Write-Host "Latest Tag: $latestTag"
-      echo "##vso[task.setvariable variable=LatestTag]$latestTag"
 
 - script: |
-    docker pull mohammadfleity2002/project1-arabiflower:$(latestTag)
-    docker run -d -p 8080:80 mohammadfleity2002/project1-arabiflower:$(latestTag)
+    docker pull mohammadfleity2002/project1-arabiflower:latest
+    docker run -d -p 8080:80 mohammadfleity2002/project1-arabiflower:latest
   displayName: 'Deploy to Docker'
