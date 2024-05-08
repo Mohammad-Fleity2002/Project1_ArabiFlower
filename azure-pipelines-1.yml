@@ -3,17 +3,30 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+# trigger:
+# - main
+
+# pool:
+#   vmImage: ubuntu-latest
+
+# steps:
+# - script: echo Hello, world!
+#   displayName: 'Run a one-line script'
+
+# - script: |
+#     echo Add other tasks to build, test, and deploy your project.
+#     echo See https://aka.ms/yaml
+#   displayName: 'Run a multi-line script'
+
 trigger:
-- main
+- main  # trigger the pipeline on main update.
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest' 
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    docker login -u $(mohammadfleity2002) -p $(MohammadDockerPassword2002) 
+    docker pull mohammadfleity2002/project1-arabiflower:latest
+    docker run -d -p 8080:80 mohammadfleity2002/project1-arabiflower:latest
+  displayName: 'Deploy to Docker'
