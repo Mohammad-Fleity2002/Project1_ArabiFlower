@@ -30,10 +30,10 @@ steps:
   inputs:
     command: login
     containerRegistry: 'ArabiFlower-Docker'  # Docker Hub service connection
-    # username: $(username)
-    # password: $(pass)
+    username: $(mohammadfleity2002)
+    password: $(MohammadDockerPassword2002)
 
 - script: |
-    docker pull mohammadfleity2002/mohammadfleity2002/project1-arabiflower:latest
-    docker run -d -p 8080:80 mohammadfleity2002/mohammadfleity2002/project1-arabiflower:latest
+    docker pull mohammadfleity2002/project1-arabiflower:latest
+    docker run -d -p 8080:80 mohammadfleity2002/project1-arabiflower:latest
   displayName: 'Deploy to Docker'
