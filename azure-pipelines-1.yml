@@ -34,8 +34,13 @@ steps:
     username: $(mohammadfleity2002)
     password: $(MohammadDockerPassword2002)
 
+- task: AzureCLI@2
+  displayName: 'Deploy to Azure App Service'
+  inputs:
+    azureSubscription: 'azure-container-connection'  # Specify your Azure service connection name
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az webapp config container set --name Arabi-Flower-Project1 --resource-group Project1_ArabiFlower_ResourceGroup --docker-custom-image-name mohammadfleity2002/project1-arabiflower:latest
 
-- script: |
-    docker pull mohammadfleity2002/project1-arabiflower:latest
-  displayName: 'Deploy to Docker'
-    # docker run -d -p 8080:80 mohammadfleity2002/project1-arabiflower:latest
+
